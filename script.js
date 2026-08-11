@@ -7,14 +7,47 @@ function tocarNota(frequencia) {
     const oscilador = contexto.createOscillator();
     const volume = contexto.createGain();
 
-    oscilador.type = 'sine'; // onda senoidal = som "puro", parecido com um diapasão
+    oscilador.type = 'sine'; //som "puro", parecido com um diapasão
     oscilador.frequency.value = frequencia; // frequência da nota
 
     oscilador.connect(volume);
     volume.connect(contexto.destination); // conecta o volume à saída de áudio
 
     volume.gain.setValueAtTime(0.3, contexto.currentTime); // volume baixo para não incomodar
-    oscilador.start(); // inicia o oscilador
-    oscilador.stop(contexto.currentTime + 1); // para o oscilador após 1 segundo
+    oscilador.start(); 
+    oscilador.stop(contexto.currentTime + 1);
 }
 
+let notaAtual = ""; // variável para armazenar a nota atual
+let pontos = 0;
+
+function novaRodada() {
+    const listaNotas = object.keys(notas);
+    const sorteada = listaNotas[Math.floor(Math.random() * listaNotas.length)];
+    notaAtual = sorteada;
+    tocarNota(notas[sorteada]);
+}
+
+function criarBotoesDeOpcoes () {
+    const container = document.getElementById("opcoes");
+    object.keys(notas).forEach(nome => {
+        const botao = document.createElement("button");
+        botao.textContent = nome;
+        botao.addEventListener("click", () => verificarResposta(nome));
+        container.appendChild(botao);
+    });
+}
+
+function verificarResposta(escolha) {
+    const resultado = document.getElementById("resultado");
+    if (escolha === notaAtual) {
+        pontos++;
+        resultado.textContent = "Acertou!";
+    } else {
+        resultado.textContent = `Errou! A nota correta era ${notaAtual}.`;
+    }
+    document.getElementById("Pontuacao").textContent = `Pontuação: ${pontos}`;
+}
+
+document.getElementById("tocar").addEventListener("click", novaRodada);
+criarBotoesDeOpcoes();
