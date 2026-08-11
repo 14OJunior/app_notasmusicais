@@ -1,5 +1,5 @@
 // Tabela de frequências das notas (oitava central) 
-// const notas = {  "DÓ": 261.63, "RÉ": 293.66, "MI": 329.63, "FÁ": 349.23, "SOL": 392.00, "LÁ": 440.00, "SI": 493.88 };
+const notas = {  "DÓ": 261.63, "RÉ": 293.66, "MI": 329.63, "FÁ": 349.23, "SOL": 392.00, "LÁ": 440.00, "SI": 493.88 };
 
 // Função que toca uma frequência por um tempo curto
 function tocarNota(frequencia) {
@@ -22,7 +22,7 @@ let notaAtual = ""; // variável para armazenar a nota atual
 let pontos = 0;
 
 function novaRodada() {
-    const listaNotas = object.keys(notas);
+    const listaNotas = Object.keys(notas);
     const sorteada = listaNotas[Math.floor(Math.random() * listaNotas.length)];
     notaAtual = sorteada;
     tocarNota(notas[sorteada]);
@@ -30,7 +30,7 @@ function novaRodada() {
 
 function criarBotoesDeOpcoes () {
     const container = document.getElementById("opcoes");
-    object.keys(notas).forEach(nome => {
+    Object.keys(notas).forEach(nome => {
         const botao = document.createElement("button");
         botao.textContent = nome;
         botao.addEventListener("click", () => verificarResposta(nome));
@@ -46,7 +46,7 @@ function verificarResposta(escolha) {
     } else {
         resultado.textContent = `Errou! A nota correta era ${notaAtual}.`;
     }
-    document.getElementById("Pontuacao").textContent = `Pontuação: ${pontos}`;
+    document.getElementById("pontuacao").textContent = `Pontos: ${pontos}`;
 }
 
 document.getElementById("tocar").addEventListener("click", novaRodada);
