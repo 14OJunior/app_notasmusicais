@@ -44,11 +44,49 @@ function verificarResposta(escolha) {
     if (escolha === notaAtual) {
         pontos++;
         resultado.textContent = "Acertou!";
+        tocarSomAcerto();
     } else {
         resultado.textContent = `Errou! A nota correta era ${notaAtual}.`;
+        tocarSomErro();
     }
     document.getElementById("pontuacao").textContent = `Pontos: ${pontos}`;
 }
 
 document.getElementById("tocar").addEventListener("click", novaRodada);
 criarBotoesDeOpcoes();
+
+function tocarSomAcerto() {
+    const contexto = new (window.AudioContext || window.webkitAudioContext)();
+    const oscilador = contexto.createOscillator();
+    const valume = contexto.createGain();
+
+    oscilador.type = "sine";
+    oscilador.frequency.setValueAtTime(880, contexto.currentTime); // nota aguda para indicar acerto
+    oscilador.frequency.exponentialRampToValueAtTime(1320, contexto.currentTime + 0.15) // sobe rapidamente para uma nota mais alta
+    oscilador.connect(volume);
+    valume.connect(contexto.destination);
+
+    volume.gain.setValueAtTime(0.3, contexto.currentTime);
+    volume.gain.exponentialRampToValueAtTime(0.01, contexto.currentTime + 0.3); // diminui o volume suavimente
+
+    oscilador.start();
+    oscilador.stop(contexto.currentTime + 0.3);
+}
+
+function tocarSomErro() {
+    const contexto = new (window.AudioContext || window.webkitAudioContext)();
+    const oscilador = contexto.createOscillator();
+    const volume = contexto.createGain();
+
+    oscilador.type = "sawtooth"; // som mais áspero para indicar erro
+    oscilador.frequency.setValueAtTime(150, contexto.currentTime); // nota grave
+
+    oscilador.connect(volume);
+    volume.connect(contexto.destination);
+
+    volume.gain.setValueAtTime(0.2, contexto.currentTime);
+    volume.gain.exponentialRampToValueAtTime(0.01, contexto.currentTime + 0.4); // diminui o volume suavemente
+
+    oscilador.start();
+    oscilador.stop(contexto.currentTime + 0.4);
+}
