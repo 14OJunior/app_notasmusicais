@@ -33,6 +33,7 @@ function criarBotoesDeOpcoes () {
     Object.keys(notas).forEach(nome => {
         const botao = document.createElement("button");
         botao.textContent = nome;
+        botao.classList.add("nota-" + nome.toLowerCase());
         botao.addEventListener("click", () => verificarResposta(nome));
         container.appendChild(botao);
     });

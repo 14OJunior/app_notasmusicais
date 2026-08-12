@@ -1,26 +1,42 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Comic Sans MS', 'Trebuchet MS',sans-serif;
     text-align: center;
     margin-top: 50px;
-    background: #f4f4f9;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    min-height: 100vh;
 }
 
 button {
-    font-size: 1.1rem;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 8px;
+    font-size: 1.2rem;
+    padding: 15px 25px;
+    margin: 8px;
+    border-radius: 50px;
     border: none;
-    background: #5b5fef;
+    background: #ff6b9d;
     color: white;
     cursor: pointer;
+    box-shadow: 0 4px 0 #c44d76;
+    transition: transform 0.1s ease;
 }
 
 button:hover {
     background: #4548c9;
 }
 
+button:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #c44d76;
+}
+
 #resultado {
     font-size: 1.3rem;
     font-weight: bold;
 }
+
+.nota-dó { background: #ff6b6b; box-shadow: 0 4px 0 #c94848; }
+.nota-ré { background: #ffa94d; box-shadow: 0 4px 0 #cc8339; }
+.nota-mi { background: #ffd43b; box-shadow: 0 4px 0 #ccaa2f; }
+.nota-fá { background: #69db7c; box-shadow: 0 4px 0 #4bad5c; }
+.nota-sol { background: #4dabf7; box-shadow: 0 4px 0 #3a84c4; }
+.nota-lá { background: #9775fa; box-shadow: 0 4px 0 #7658c7; }
+.nota-si { background: #f783ac; box-shadow: 0 4px 0 #c6698a; }

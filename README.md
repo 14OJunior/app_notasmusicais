@@ -9,7 +9,7 @@
  ## Tecnologias- HTML, CSS, JavaScript puro
  - Web Audio API para geração de som 
  
- ## Link https://14OJunior.github.io/app-notas-musicais 
+ ## Link https://14OJunior.github.io/app_notasmusicais 
  
  ## Próximos passos
  - Adicionar mais notas (sustenidos/bemóis)
