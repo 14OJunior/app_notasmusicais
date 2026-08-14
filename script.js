@@ -58,13 +58,13 @@ criarBotoesDeOpcoes();
 function tocarSomAcerto() {
     const contexto = new (window.AudioContext || window.webkitAudioContext)();
     const oscilador = contexto.createOscillator();
-    const valume = contexto.createGain();
+    const volume = contexto.createGain();
 
-    oscilador.type = "sine";
+    oscilador.type = "sine"; // som puro para indicar acerto
     oscilador.frequency.setValueAtTime(880, contexto.currentTime); // nota aguda para indicar acerto
     oscilador.frequency.exponentialRampToValueAtTime(1320, contexto.currentTime + 0.15) // sobe rapidamente para uma nota mais alta
     oscilador.connect(volume);
-    valume.connect(contexto.destination);
+    volume.connect(contexto.destination);
 
     volume.gain.setValueAtTime(0.3, contexto.currentTime);
     volume.gain.exponentialRampToValueAtTime(0.01, contexto.currentTime + 0.3); // diminui o volume suavimente
