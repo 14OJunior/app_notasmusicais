@@ -1,7 +1,7 @@
 const contextoAudio = new (window.AudioContext || window.webkitAudioContext)();
 
 // Tabela de frequências das notas (oitava central) 
-const notas = {  "DÓ": 261.63, "RÉ": 293.66, "MI": 329.63, "FÁ": 349.23, "SOL": 392.00, "LÁ": 440.00, "SI": 493.88 };
+const notas = {  "DÓ": 261.63, "DÓ#": 277.18, "RÉ": 293.66, "RÉ#": 311.13, "MI": 329.63, "FÁ": 349.23, "FÁ#": 369.99, "SOL": 392.00, "SOL#": 415.30, "LÁ": 440.00, "LÁ#": 466.16, "SI": 493.88 };
 
 // Função que toca uma frequência por um tempo curto
 function tocarNota(frequencia) {

@@ -34,9 +34,14 @@ button:active {
 }
 
 .nota-dó { background: #ff6b6b; box-shadow: 0 4px 0 #c94848; }
+.nota-dó# { background: #ff8787; box-shadow: 0 4px 0 #c96b6b; }
 .nota-ré { background: #ffa94d; box-shadow: 0 4px 0 #cc8339; }
+.nota-ré# { background: #ffc94d; box-shadow: 0 4px 0 #ccaa2f; }
 .nota-mi { background: #ffd43b; box-shadow: 0 4px 0 #ccaa2f; }
 .nota-fá { background: #69db7c; box-shadow: 0 4px 0 #4bad5c; }
+.nota-fá# { background: #8be98b; box-shadow: 0 4px 0 #6bbd6b; }
 .nota-sol { background: #4dabf7; box-shadow: 0 4px 0 #3a84c4; }
+.nota-sol# { background: #6db5f9; box-shadow: 0 4px 0 #5a9bc8; }
 .nota-lá { background: #9775fa; box-shadow: 0 4px 0 #7658c7; }
+.nota-lá# { background: #a88bf9; box-shadow: 0 4px 0 #8a6fc9; }
 .nota-si { background: #f783ac; box-shadow: 0 4px 0 #c6698a; }
