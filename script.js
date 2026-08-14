@@ -1,21 +1,22 @@
+const contextoAudio = new (window.AudioContext || window.webkitAudioContext)();
+
 // Tabela de frequências das notas (oitava central) 
 const notas = {  "DÓ": 261.63, "RÉ": 293.66, "MI": 329.63, "FÁ": 349.23, "SOL": 392.00, "LÁ": 440.00, "SI": 493.88 };
 
 // Função que toca uma frequência por um tempo curto
 function tocarNota(frequencia) {
-    const contexto = new (window.AudioContext || window.webkitAudioContext)();
-    const oscilador = contexto.createOscillator();
-    const volume = contexto.createGain();
+    const oscilador = contextoAudio.createOscillator();
+    const volume = contextoAudio.createGain();
 
     oscilador.type = 'sine'; //som "puro", parecido com um diapasão
     oscilador.frequency.value = frequencia; // frequência da nota
 
     oscilador.connect(volume);
-    volume.connect(contexto.destination); // conecta o volume à saída de áudio
+    volume.connect(contextoAudio.destination); // conecta o volume à saída de áudio
 
-    volume.gain.setValueAtTime(0.3, contexto.currentTime); // volume baixo para não incomodar
+    volume.gain.setValueAtTime(0.3, contextoAudio.currentTime); // volume baixo para não incomodar
     oscilador.start(); 
-    oscilador.stop(contexto.currentTime + 1);
+    oscilador.stop(contextoAudio.currentTime + 1);
 }
 
 let notaAtual = ""; // variável para armazenar a nota atual
@@ -56,37 +57,35 @@ document.getElementById("tocar").addEventListener("click", novaRodada);
 criarBotoesDeOpcoes();
 
 function tocarSomAcerto() {
-    const contexto = new (window.AudioContext || window.webkitAudioContext)();
-    const oscilador = contexto.createOscillator();
-    const volume = contexto.createGain();
+    const oscilador = contextoAudio.createOscillator();
+    const volume = contextoAudio.createGain();
 
     oscilador.type = "sine"; // som puro para indicar acerto
-    oscilador.frequency.setValueAtTime(880, contexto.currentTime); // nota aguda para indicar acerto
-    oscilador.frequency.exponentialRampToValueAtTime(1320, contexto.currentTime + 0.15) // sobe rapidamente para uma nota mais alta
+    oscilador.frequency.setValueAtTime(880, contextoAudio.currentTime); // nota aguda para indicar acerto
+    oscilador.frequency.exponentialRampToValueAtTime(1320, contextoAudio.currentTime + 0.15) // sobe rapidamente para uma nota mais alta
     oscilador.connect(volume);
-    volume.connect(contexto.destination);
+    volume.connect(contextoAudio.destination);
 
-    volume.gain.setValueAtTime(0.3, contexto.currentTime);
-    volume.gain.exponentialRampToValueAtTime(0.01, contexto.currentTime + 0.3); // diminui o volume suavimente
+    volume.gain.setValueAtTime(0.3, contextoAudio.currentTime);
+    volume.gain.exponentialRampToValueAtTime(0.01, contextoAudio.currentTime + 0.3); // diminui o volume suavimente
 
     oscilador.start();
-    oscilador.stop(contexto.currentTime + 0.3);
+    oscilador.stop(contextoAudio.currentTime + 0.3);
 }
 
 function tocarSomErro() {
-    const contexto = new (window.AudioContext || window.webkitAudioContext)();
-    const oscilador = contexto.createOscillator();
-    const volume = contexto.createGain();
+    const oscilador = contextoAudio.createOscillator();
+    const volume = contextoAudio.createGain();
 
     oscilador.type = "sawtooth"; // som mais áspero para indicar erro
-    oscilador.frequency.setValueAtTime(150, contexto.currentTime); // nota grave
+    oscilador.frequency.setValueAtTime(150, contextoAudio.currentTime); // nota grave
 
     oscilador.connect(volume);
-    volume.connect(contexto.destination);
+    volume.connect(contextoAudio.destination);
 
-    volume.gain.setValueAtTime(0.2, contexto.currentTime);
-    volume.gain.exponentialRampToValueAtTime(0.01, contexto.currentTime + 0.4); // diminui o volume suavemente
+    volume.gain.setValueAtTime(0.2, contextoAudio.currentTime);
+    volume.gain.exponentialRampToValueAtTime(0.01, contextoAudio.currentTime + 0.4); // diminui o volume suavemente
 
     oscilador.start();
-    oscilador.stop(contexto.currentTime + 0.4);
+    oscilador.stop(contextoAudio.currentTime + 0.4);
 }
