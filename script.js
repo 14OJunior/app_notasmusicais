@@ -39,7 +39,7 @@ function novaRodada() {
     const listaNotas = Object.keys(notas);
     const sorteada = listaNotas[Math.floor(Math.random() * listaNotas.length)];
     notaAtual = sorteada;
-    tocarNota(notas[sorteada]);
+    tocarNotaPiano(sorteada);
 }
 
 function criarBotoesDeOpcoes () {
@@ -101,4 +101,23 @@ function tocarSomErro() {
 
     oscilador.start();
     oscilador.stop(contextoAudio.currentTime + 0.4);
+}
+
+async function tocarNotaPiano(nomeNota) {
+    const resposta = await fetch(`notas_piano/piano-${nomeNota}.mp3`);
+    const arrayBuffer = await resposta.arrayBuffer();
+    const audioBuffer = await contextoAudio.decodeAudioData(arrayBuffer);
+
+    const fonte = contextoAudio.createBufferSource();
+    const volume = contextoAudio.createGain();
+    
+    fonte.buffer = audioBuffer;
+    fonte.connect(contextoAudio.destination);
+
+    const duracao = audioBuffer.duration;
+    volume.gain.setValueAtTime(1, contextoAudio.currentTime);
+    volume.gain.setValueAtTime(1, contextoAudio.currentTime + duracao - 0.1);
+    volume.gain.linearRampToValueAtTime(0, contextoAudio.currentTime + duracao);
+
+    fonte.start();
 }
